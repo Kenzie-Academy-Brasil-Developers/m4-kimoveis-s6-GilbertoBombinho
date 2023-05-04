@@ -1,29 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity('users')
-class User {
+export class User {
 @PrimaryGeneratedColumn('increment')
 id: number;
 
-@Column({ type: 'varchar', length: 45, nullable: false })
+@Column({ type: 'varchar', length: 45 })
 nome: string;
 
-@Column({ type: 'varchar', length: 45, nullable: false, unique: true })
+@Column({ type: 'varchar', length: 45, unique: true })
 email: string;
 
 @Column({ type: 'boolean', default: false })
 admin: boolean;
 
-@Column({ type: 'varchar', length: 120, nullable: false })
+@Column({ type: 'varchar', length: 120 })
 password: string;
 
-@Column({ type: 'date', nullable: false })
-createdAt: Date;
+@CreateDateColumn({ type: 'date' })
+createdAt: Date | string;
 
-@Column({ type: 'date', nullable: false })
+@CreateDateColumn({ type: 'date' })
 updatedAt: Date;
 
-@Column({ type: 'date', nullable: true })
+@CreateDateColumn({ type: 'date' })
 deletedAt?: Date | null | undefined;
 }
-export default User;
