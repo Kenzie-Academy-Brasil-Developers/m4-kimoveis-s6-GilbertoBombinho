@@ -2,19 +2,24 @@ import { z } from 'zod'
 
 export const userSchema = z.object({
   id: z.number(),
-  nome: z.string().max(45),
+  name: z.string().max(45),
   email: z.string().max(45).email(),
   password: z.string().max(120),
   admin: z.boolean(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  deletedAt: z.date().nullish()
+  createdAt: z.string().nullish(),
+  updatedAt: z.string().nullish(),
+  deletedAt: z.string().nullish()
 })
 
 export const userSchemaRequest = userSchema.omit({
-  id: true
+  id: true, 
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true
 })
 
 export const userSchemaResponse = userSchema.omit({
   password: true
 })
+
+export const userSchemaArray = z.array(userSchemaResponse)

@@ -8,12 +8,12 @@ import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 
 export const createLoginService = async (
-  loginData: TLoginRequest
+  loginRequest: TLoginRequest
 ): Promise<string> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User)
   const user: User | null = await userRepository.findOne({
     where: {
-      email: loginData.email
+      email: loginRequest.email
     }
   })
 
@@ -21,7 +21,7 @@ export const createLoginService = async (
     throw new AppError('Wrong email/password', 401)
   }
 
-  const password = await compare(loginData.password, user.password)
+  const password = await compare(loginRequest.password, user.password)
 
   if (!password) {
     throw new AppError('Wrong email/password', 401)
