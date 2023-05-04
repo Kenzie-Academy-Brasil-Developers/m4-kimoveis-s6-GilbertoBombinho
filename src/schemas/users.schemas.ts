@@ -22,4 +22,6 @@ export const userSchemaResponse = userSchema.omit({
   password: true
 })
 
+export const userSchemaUpdate = userSchema.partial().omit({ id: true, admin: true })
+
 export const userSchemaArray = z.array(userSchemaResponse)
