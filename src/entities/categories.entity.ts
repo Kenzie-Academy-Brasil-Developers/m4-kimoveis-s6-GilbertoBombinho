@@ -1,10 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany
+} from 'typeorm'
+import { RealEstate } from './real_estate.entity'
 
 @Entity('categories')
 export class Category {
-@PrimaryGeneratedColumn('increment')
-id: number;
+  @PrimaryGeneratedColumn('increment')
+  id: number
 
-@Column({ type: 'varchar', length: 45, unique: true, nullable: false })
-name: string;
+  @Column({ type: 'varchar', length: 45, unique: true })
+  name: string
+
+  @OneToMany(() => RealEstate, realEstate => realEstate.category)
+  realEstate: RealEstate[]
 }
