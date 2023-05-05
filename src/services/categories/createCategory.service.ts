@@ -4,7 +4,7 @@ import { Repository } from "typeorm"
 import { AppDataSource } from '../../data-source'
 import { categorySchema } from "../../schemas/categories.schemas"
 
-export const createUsersService = async (categoryData: TCategoryRequest): Promise<TCategory> => {
+export const createCategoryService = async (categoryData: TCategoryRequest): Promise<TCategory> => {
   const categoryRepository: Repository<Category> = AppDataSource.getRepository(Category)
   
   const category: Category = categoryRepository.create(categoryData)

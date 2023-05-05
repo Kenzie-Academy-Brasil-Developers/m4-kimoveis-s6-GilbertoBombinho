@@ -8,3 +8,5 @@ export const categorySchema = z.object({
 export const categorySchemaRequest = categorySchema.omit({
   id: true
 })
+
+export const categorySchemaArray = z.array(categorySchema)
