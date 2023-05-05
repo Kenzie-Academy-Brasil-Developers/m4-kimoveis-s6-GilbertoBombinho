@@ -4,17 +4,17 @@ import { Repository } from 'typeorm'
 import { AppError } from '../error'
 import { User } from '../entities'
 
-export const ensureEmailExistMiddleware = async (
+export const ensureIdExistMiddleware = async (
   request: Request,
-  res: Response,
+  response: Response,
   next: NextFunction
 ) => {
   const userRepo: Repository<User> = AppDataSource.getRepository(User)
-  const email = await userRepo.findOneBy({
-    email: request.body.email
+  const Id = await userRepo.findOneBy({
+    id: parseInt(request.params.id)
   })
-  if (email) {
-    throw new AppError('Email already exists', 409)
+  if (!Id) {
+    throw new AppError('User not found', 404)
   }
   return next()
 }

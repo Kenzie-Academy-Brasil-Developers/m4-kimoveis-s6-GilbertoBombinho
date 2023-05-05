@@ -10,6 +10,8 @@ import { userSchemaRequest, userSchemaUpdate } from '../schemas/users.schemas'
 import { ensureEmailExistMiddleware } from '../middlewares/ensureEmailExist'
 import { ensureIsAdminMiddleware } from '../middlewares/ensureIsAdmin'
 import { ensureTokenIsValidMiddleware } from '../middlewares/ensureTokenIsValid'
+import { ensureCorrectTokenMiddleware } from '../middlewares/ensureCorrectToken'
+import { ensureIdExistMiddleware } from '../middlewares/ensureIdExist'
 
 export const userRoutes: Router = Router()
 
@@ -29,10 +31,17 @@ userRoutes.get(
 
 userRoutes.patch(
   '/:id',
+  ensureIdExistMiddleware,
   ensureTokenIsValidMiddleware,
-  ensureIsAdminMiddleware,
+  ensureCorrectTokenMiddleware,
   ensureBodyIsValidMiddleware(userSchemaUpdate),
   updateUsersController
 )
 
-userRoutes.delete('/:id', deleteUsersController)
+userRoutes.delete(
+  '/:id',
+  ensureIdExistMiddleware,
+  ensureTokenIsValidMiddleware,
+  ensureIsAdminMiddleware,
+  deleteUsersController
+)

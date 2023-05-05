@@ -18,13 +18,13 @@ export const createLoginService = async (
   })
 
   if (!user) {
-    throw new AppError('Wrong email/password', 401)
+    throw new AppError('Invalid credentials', 401)
   }
 
   const password = await compare(loginRequest.password, user.password)
 
   if (!password) {
-    throw new AppError('Wrong email/password', 401)
+    throw new AppError('Invalid credentials', 401)
   }
 
   const token = jwt.sign({}, process.env.SECRET_KEY!, {
