@@ -1,13 +1,15 @@
 import { NextFunction, Request, Response } from 'express'
-import { AppError } from '../error'
+import jwt from 'jsonwebtoken'
 import { verify } from 'jsonwebtoken'
+import { AppError } from '../error'
+import 'dotenv/config'
 
 export const ensureTokenIsValidMiddleware = async (
   request: Request,
   response: Response,
   next: NextFunction
 ): Promise<Response | void> => {
-  let token = request.headers.authorization
+  let token: string | undefined = request.headers.authorization
   if (!token) {
     throw new AppError('Token is Missing', 401)
   }
@@ -23,3 +25,6 @@ export const ensureTokenIsValidMiddleware = async (
     return next()
   })
 }
+
+
+

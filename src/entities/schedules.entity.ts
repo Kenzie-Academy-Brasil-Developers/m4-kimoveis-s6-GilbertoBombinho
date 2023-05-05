@@ -2,8 +2,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
-  ManyToMany,
   ManyToOne
 } from 'typeorm'
 import { User } from './user.entity'
@@ -20,9 +18,9 @@ export class Schedule {
   @Column({ type: 'time' })
   hour: Date
 
-  @ManyToOne(() => User, user => user.schedule)
+  @ManyToOne(() => User, User => User.schedule)
   user: User
 
-  @ManyToOne(() => RealEstate, realEstate => realEstate.schedules)
+  @ManyToOne(() => RealEstate, RealEstate => RealEstate.schedules)
   realEstate: RealEstate
 }

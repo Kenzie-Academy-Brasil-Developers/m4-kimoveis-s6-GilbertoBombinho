@@ -32,12 +32,12 @@ export class User {
   createdAt: string
 
   @UpdateDateColumn({ type: 'date' })
-  updatedAt?: string
+  updatedAt: string
 
   @DeleteDateColumn({ type: 'date' })
-  deletedAt?: string | null | undefined
+  deletedAt: string 
 
-  @OneToMany(() => Schedule, schedules => schedules.user)
+  @OneToMany(() => Schedule, Schedule => Schedule.user)
   schedule: Schedule
 
   @BeforeInsert()

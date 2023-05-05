@@ -7,10 +7,8 @@ export const ensureIsAdminMiddleware = async (
   next: NextFunction
 ): Promise<Response | void> => {
   const token = response.locals.token
-  if(token.id !== request.params.id){
     if(token.admin === false){
       throw new AppError("Insufficient Permission", 403)
     }
-  }
   return next()
 }

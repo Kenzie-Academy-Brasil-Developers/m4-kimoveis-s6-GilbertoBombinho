@@ -23,7 +23,7 @@ export class RealEstate {
   sold: boolean
 
   @Column({ type: 'decimal', precision: 12, scale: 2, default: 0 })
-  value: number
+  value: number | string
 
   @Column({ type: 'integer' })
   size: number
@@ -34,13 +34,13 @@ export class RealEstate {
   @UpdateDateColumn({ type: 'date' })
   updatedAt: Date
 
-  @OneToOne(() => Address, address => address.realEstate)
+  @OneToOne(() => Address)
   @JoinColumn()
   address: Address
 
-  @ManyToOne(() => Category, category => category.realEstate)
+  @ManyToOne(() => Category, Category => Category.realEstate)
   category: Category
 
-  @OneToMany(() => Schedule, schedule => schedule.realEstate)
+  @OneToMany(() => Schedule, Schedule => Schedule.realEstate)
   schedules: Schedule[]
 }

@@ -14,7 +14,7 @@ export const ensureEmailExistMiddleware = async (
     email: req.body.email
   })
   if (email) {
-    throw new AppError('Email exist', 409)
+    throw new AppError('Email already exists', 409)
   }
   return next()
 }

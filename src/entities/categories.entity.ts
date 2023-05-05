@@ -14,6 +14,6 @@ export class Category {
   @Column({ type: 'varchar', length: 45, unique: true })
   name: string
 
-  @OneToMany(() => RealEstate, realEstate => realEstate.category)
+  @OneToMany(() => RealEstate, RealEstate => RealEstate.category)
   realEstate: RealEstate[]
 }

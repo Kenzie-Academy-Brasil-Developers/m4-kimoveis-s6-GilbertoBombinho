@@ -12,8 +12,8 @@ export class Address {
   @Column({ type: 'varchar', length: 8 })
   zipCode: string
 
-  @Column({ type: 'varchar', length: 7 })
-  number?: string | null | undefined
+  @Column({ type: 'varchar', length: 7, nullable: true })
+  number?: string | null | undefined 
 
   @Column({ type: 'varchar', length: 20 })
   city: string
@@ -21,6 +21,4 @@ export class Address {
   @Column({ type: 'varchar', length: 2 })
   state: string
 
-  @OneToOne(() => RealEstate, realEstate => realEstate.address)
-  realEstate: RealEstate
 }
