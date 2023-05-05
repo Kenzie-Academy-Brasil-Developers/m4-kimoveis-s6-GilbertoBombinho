@@ -14,7 +14,7 @@ export const listCategoriesController = async (
   return response.json()
 }
 
-export const listImmobileController = async (
+export const listCategoryImmobileController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
