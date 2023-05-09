@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'
 
-export const createVisitController = async (
+export const createSchedulesController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
   return response.json()
 }
 
-export const listVisitsController = async (
+export const listSchedulesController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {

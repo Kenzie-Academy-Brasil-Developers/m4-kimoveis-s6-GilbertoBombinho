@@ -5,6 +5,22 @@ import {
   TRealEstate,
   TRealEstateRequest
 } from '../../interfaces/realEstate.interface'
+import { realEstateSchema } from '../../schemas/realEstate.schema'
+
+// export const createRealEstateService = async (
+//   realEstateData: TRealEstateRequest
+// ): Promise<TRealEstate> => {
+//   const realEstateRepository: Repository<RealEstate> =
+//     AppDataSource.getRepository(RealEstate)
+
+//   const realEstate: RealEstate = realEstateRepository.create()
+
+//   await realEstateRepository.save(realEstate)
+
+//   const realEstateResult = realEstateSchema.parse(realEstate)
+
+//   return realEstateResult
+// }
 
 export const createRealEstateService = async (
   immobileData: TRealEstateRequest
@@ -15,7 +31,7 @@ export const createRealEstateService = async (
   const immobile: InsertResult = await immobileRepository
     .createQueryBuilder()
     .insert()
-    .values(immobileData)
+    //.values(immobileData)
     .returning('*')
     .execute()
 
