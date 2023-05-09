@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { listRealEstateService } from '../services/real-estate/listTRealEstate.service'
+//import { listRealEstateService } from '../services/real-estate/listTRealEstate.service'
 import { TRealEstate } from '../interfaces/realEstate.interface'
 import { createRealEstateService } from '../services/real-estate/createRealEstate.service'
 

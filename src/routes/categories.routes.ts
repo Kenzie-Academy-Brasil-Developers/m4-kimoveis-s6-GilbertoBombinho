@@ -2,7 +2,7 @@ import { Router } from 'express'
 import {
   createCategoryController,
   listCategoriesController,
-  listCategoryImmobileController
+  listCategoryRealEstateController
 } from '../controllers/categories.controllers'
 import { ensureBodyIsValidMiddleware } from '../middlewares/ensureBodyIsValid'
 import { categorySchemaRequest } from '../schemas/categories.schemas'
@@ -21,4 +21,4 @@ categoriesRoutes.post(
   createCategoryController
 )
 categoriesRoutes.get('', listCategoriesController)
-categoriesRoutes.get('/:id/realEstate', listCategoryImmobileController)
+categoriesRoutes.get('/:id/realEstate', listCategoryRealEstateController)

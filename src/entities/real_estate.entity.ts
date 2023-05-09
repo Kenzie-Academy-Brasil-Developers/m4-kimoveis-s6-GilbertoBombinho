@@ -29,10 +29,10 @@ export class RealEstate {
   size: number
 
   @CreateDateColumn({ type: 'date' })
-  createdAt: Date
+  createdAt: string | Date 
 
   @UpdateDateColumn({ type: 'date' })
-  updatedAt: Date
+  updatedAt: string | Date
 
   @OneToOne(() => Address)
   @JoinColumn()

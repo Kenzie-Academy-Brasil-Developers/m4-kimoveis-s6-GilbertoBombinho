@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { TCategory, TCategoryRequest } from '../interfaces/categories.interface'
 import { createCategoryService } from '../services/categories/createCategory.service'
 import { listCategoryService } from '../services/categories/listCategories.service'
+import { listCategoryRealEstateService } from '../services/categories/ListCategoryRealEstate.service'
 
 export const createCategoryController = async (
   request: Request,
@@ -20,9 +21,11 @@ export const listCategoriesController = async (
   return response.json(categories)
 }
 
-export const listCategoryImmobileController = async (
+export const listCategoryRealEstateController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-  return response.json()
+  const realEstateId: number = parseInt(request.params.id)
+  const categoryRealEstate = await listCategoryRealEstateService(realEstateId)
+  return response.json(categoryRealEstate)
 }

@@ -9,7 +9,6 @@ export const listCategoryService = async (): Promise<TCategoryArray> => {
     AppDataSource.getRepository(Category)
   let categories: TCategoryArray | undefined
   categories = await categoryRepository.find({})
-  const usersResult: TCategoryArray = categorySchemaArray.parse(categories)
-
-  return usersResult
+  const categoryResult: TCategoryArray = categorySchemaArray.parse(categories)
+  return categoryResult
 }
