@@ -19,7 +19,7 @@ export const ensureTokenIsValidMiddleware = async (
       throw new AppError(error.message, 401)
     }
     response.locals.token = {
-      id: decoded?.sub,
+      id: parseInt(decoded?.sub),
       admin: decoded.admin
     }
     return next()

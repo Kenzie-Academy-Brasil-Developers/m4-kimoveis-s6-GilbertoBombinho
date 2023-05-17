@@ -7,10 +7,8 @@ export const ensureCorrectTokenMiddleware = async (
   next: NextFunction
 ): Promise<Response | void> => {
   const token = response.locals.token
-  if (token.id !== request.params.id) {
-    if (token.admin === false) {
-      throw new AppError('Insufficient permission', 403)
-    }
+  if (!token.admin && token.id !== Number(request.params.id)) {
+    throw new AppError('Insufficient permission', 403)
   }
   return next()
 }

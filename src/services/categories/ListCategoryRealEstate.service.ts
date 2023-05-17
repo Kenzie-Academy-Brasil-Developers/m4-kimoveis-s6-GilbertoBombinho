@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm'
 import { Category } from '../../entities'
 import { AppDataSource } from '../../data-source'
+import { AppError } from '../../error'
 
 export const listCategoryRealEstateService = async (
   categoryId: number
@@ -8,15 +9,18 @@ export const listCategoryRealEstateService = async (
   const categoryRepository: Repository<Category> =
     AppDataSource.getRepository(Category)
 
-  const categoriesRealEstate: Category | null = await categoryRepository
-    .createQueryBuilder('categories')
-    .innerJoinAndSelect(
-      'categories.categoriesRealEstate',
-      'categoriesRealEstate'
-    )
-    .innerJoinAndSelect('categoriesRealEstate.real', 'real')
-    .where('categories.id = :categoryId', { categoryId })
-    .getOne()
+  const categoriesRealEstate: Category | null = await categoryRepository.findOne({
+    where:{
+      id: categoryId
+    },
+    relations: {
+      realEstate: true
+    }
+  })
+
+  if(!categoriesRealEstate){
+    throw new AppError('Category not found', 404)
+  }
 
   return categoriesRealEstate
 }

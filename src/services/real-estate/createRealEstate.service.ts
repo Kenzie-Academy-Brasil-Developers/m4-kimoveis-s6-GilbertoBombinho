@@ -1,11 +1,7 @@
 import { Address, Category, RealEstate } from '../../entities'
 import { Repository } from 'typeorm'
 import { AppDataSource } from '../../data-source'
-import {
-  TRealEstate,
-  TRealEstateRequest
-} from '../../interfaces/realEstate.interface'
-import { realEstateSchema } from '../../schemas/realEstate.schema'
+import { TRealEstateRequest } from '../../interfaces/realEstate.interface'
 import { AppError } from '../../error'
 
 export const createRealEstateService = async (
@@ -18,12 +14,12 @@ export const createRealEstateService = async (
   const categoryRepository: Repository<Category> =
     AppDataSource.getRepository(Category)
 
-    const categoryExist = await categoryRepository.findOneBy({
-      id: realEstateData.categoryId
-    })
-    if(!categoryExist){
-      throw new AppError('category not found', 404)
-    }
+  const categoryExist = await categoryRepository.findOneBy({
+    id: realEstateData.categoryId
+  })
+  if (!categoryExist) {
+    throw new AppError('category not found', 404)
+  }
 
   const addressCreate = addressRepository.create(realEstateData.address)
   await addressRepository.save(addressCreate)
@@ -36,7 +32,5 @@ export const createRealEstateService = async (
   })
   await realEstateRepository.save(realEstate)
 
-  //const realEstateResult = realEstateSchema.parse(realEstate)
   return realEstate
 }
-
