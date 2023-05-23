@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRoutes = void 0;
+const express_1 = require("express");
+const users_controllers_1 = require("../controllers/users.controllers");
+const ensureBodyIsValid_1 = require("../middlewares/ensureBodyIsValid");
+const users_schemas_1 = require("../schemas/users.schemas");
+const ensureEmailExist_1 = require("../middlewares/ensureEmailExist");
+const ensureIsAdmin_1 = require("../middlewares/ensureIsAdmin");
+const ensureTokenIsValid_1 = require("../middlewares/ensureTokenIsValid");
+const ensureCorrectToken_1 = require("../middlewares/ensureCorrectToken");
+const ensureIdExist_1 = require("../middlewares/ensureIdExist");
+exports.userRoutes = (0, express_1.Router)();
+exports.userRoutes.post('', (0, ensureBodyIsValid_1.ensureBodyIsValidMiddleware)(users_schemas_1.userSchemaRequest), ensureEmailExist_1.ensureEmailExistMiddleware, users_controllers_1.createUsersController);
+exports.userRoutes.get('', ensureTokenIsValid_1.ensureTokenIsValidMiddleware, ensureIsAdmin_1.ensureIsAdminMiddleware, users_controllers_1.getUsersController);
+exports.userRoutes.patch('/:id', ensureIdExist_1.ensureIdExistMiddleware, ensureTokenIsValid_1.ensureTokenIsValidMiddleware, ensureCorrectToken_1.ensureCorrectTokenMiddleware, (0, ensureBodyIsValid_1.ensureBodyIsValidMiddleware)(users_schemas_1.userSchemaUpdate), users_controllers_1.updateUsersController);
+exports.userRoutes.delete('/:id', ensureIdExist_1.ensureIdExistMiddleware, ensureTokenIsValid_1.ensureTokenIsValidMiddleware, ensureIsAdmin_1.ensureIsAdminMiddleware, users_controllers_1.deleteUsersController);
